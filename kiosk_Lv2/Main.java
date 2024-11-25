@@ -1,9 +1,11 @@
 package kiosk_Lv2;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 키오스크 메뉴 관리 및 사용자 입력을 처리하는 클래스
+ */
 public class Main {
     public static void main(String[] args) {
         //음식 메뉴를 담는 list 선언, 초기화
