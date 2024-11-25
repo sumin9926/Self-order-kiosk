@@ -22,7 +22,7 @@ public class Kiosk {
         do {
             System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < menuItems.size(); i++) { //list에 있는 메뉴 출력
-                System.out.println(i + ".  " + menuItems.get(i).foodName + "   | W "
+                System.out.println((i+1) + ".  " + menuItems.get(i).foodName + "   | W "
                         + menuItems.get(i).prize + " | " + menuItems.get(i).description);
             }
             System.out.println("0. 종료      | 종료");
@@ -31,8 +31,8 @@ public class Kiosk {
             if (command == 0) { // 입력된 숫자가 0이면 프로그램 종료
                 System.out.println("키오스크를 종료합니다.");
             }else if(command<=menuItems.size()){ // 유효한 숫자가 입력되면 이름, 가격, 설명 출력
-                System.out.println("선택한 메뉴: " + menuItems.get(command).foodName + "   | W "
-                        + menuItems.get(command).prize + " | " + menuItems.get(command).description+"\n");
+                System.out.println("선택한 메뉴: " + menuItems.get(command-1).foodName + "   | W "
+                        + menuItems.get(command-1).prize + " | " + menuItems.get(command-1).description+"\n");
             }else{
                 System.out.println("메뉴판에 없는 번호입니다."+"\n"); //유효하지 않은 숫자 입력 시 오류 메시지 출력
             }
