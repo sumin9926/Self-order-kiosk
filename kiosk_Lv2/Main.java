@@ -17,7 +17,7 @@ public class Main {
         Scanner sc=new Scanner(System.in);
         int command=Integer.MAX_VALUE;
 
-        /*메뉴판 출력*/
+        /*메뉴판 출력 및 입력된 숫자에 따른 로직 실행*/
         do {
             System.out.println("[ SHAKESHACK MENU ]");
             for (int i = 0; i < menuList.size(); i++) { //list에 있는 메뉴 출력
@@ -26,7 +26,7 @@ public class Main {
             }
             System.out.println("0. 종료      | 종료");
 
-            command = sc.nextInt();
+            command = sc.nextInt(); //사용자로부터 숫자 입력 받기
             if (command == 0) { // 입력된 숫자가 0이면 프로그램 종료
                 System.out.println("키오스크를 종료합니다.");
             }else if(command<=menuList.size()){ // 메뉴에 있는 숫자가 입력되면 이름, 가격, 설명 출력
