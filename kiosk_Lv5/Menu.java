@@ -1,4 +1,4 @@
-package kiosk_Lv4;
+package kiosk_Lv5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Menu {
 
-    String category; //카테고리 이름 필드
-    List<MenuItem> menuItems;//음식 메뉴를 저장하는 List 필드
+    private String category; //카테고리 이름 필드
+    private List<MenuItem> menuItems;//음식 메뉴를 저장하는 List 필드
 
     /*생성자*/
     public Menu(String category){ //생성자를 선언과 동시에 카테고리 이름을 지정
@@ -18,7 +18,15 @@ public class Menu {
         this.menuItems=new ArrayList<>(); //리스트 초기화
     }
 
-    public void addItems(MenuItem...menuItem){ //음식 메뉴를 List에 저장
+    void addItems(MenuItem...menuItem){ //음식 메뉴를 List에 저장
         this.menuItems.addAll(Arrays.asList(menuItem));
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
     }
 }
