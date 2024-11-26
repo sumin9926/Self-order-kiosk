@@ -1,0 +1,23 @@
+package kiosk_Lv4;
+
+import java.util.List;
+
+/**
+ * 카테고리와 MenuItem으로 구성된 List(음식 메뉴 List)를 관리하는 클래스 입니다.
+ */
+public class Menu {
+
+    String category; //카테고리 이름 필드
+    List<MenuItem> menuItems;//음식 메뉴를 저장하는 List 필드
+
+    /*생성자*/
+    public Menu(String category){ //생성자를 선언과 동시에 카테고리 이름을 지정
+        this.category=category;
+    }
+
+    public void addItems(MenuItem...menuItem){ //음식 메뉴를 List에 저장
+            for(MenuItem item:menuItem){
+                this.menuItems.add(item);
+            }
+    }
+}
