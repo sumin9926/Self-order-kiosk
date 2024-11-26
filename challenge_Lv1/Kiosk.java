@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Kiosk {
     private Map<String, ShoppingCart> shoppingCarts=new HashMap<>(); //선택한 메뉴를 담을 장바구니 컬렉션
-    private List<Menu> menus=new ArrayList<>(); //Menu 객체를 저장하는 List
+    private static List<Menu> menus=new ArrayList<>(); //Menu 객체를 저장하는 List
 
     void addMenu(Menu...menuArr){ //Menu 객체를 List에 저장하는 메서드
         this.menus.addAll(Arrays.asList(menuArr));
@@ -17,6 +17,7 @@ public class Kiosk {
     /*키오스크 프로그램 실행 메서드*/
     void start(){
         int command = Integer.MAX_VALUE; //사용자로부터 입력받은 숫자를 저장하는 변수
+
         do {
             /*1. 카테고리 선택 단계*/
             System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
@@ -32,13 +33,15 @@ public class Kiosk {
             /*2. 음식 메뉴 선택 단계*/
             List<MenuItem> menuItemsList=menus.get(command-1).getMenuItems();// 입력된 숫자에 맞는 카테고리의 음식 메뉴 List
             command = scanNumber(menuItemsList); //사용자로부터 선택하려는 메뉴 번호 입력 받기,(유효하지 않은 숫자 예외 처리)
-            MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴 하나
             if (command != 0) {//선택된 메뉴 정보 출력
+                MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴 하나
                 System.out.println("선택한 메뉴: "+menuItem.getFoodName()+"   | W "
                         +menuItem.getPrize()+" | "+menuItem.getDescription()+"\n");
                 /*3. 장바구니에 음식 담기*/
                 addToCart(menuItem);
             }
+            System.out.println(menuItemsList.getClass().getSimpleName());
+            System.out.println(menus.getClass().getSimpleName());
             //음식 메뉴 선택 단계에서 0 입력시 카테고리 선택 단계로 되돌아감
         }while (true);
     }
@@ -75,7 +78,8 @@ public class Kiosk {
         Scanner sc=new Scanner(System.in);
         do{
             int num=sc.nextInt(); //숫자 입력
-            if((shoppingCarts.isEmpty()&&num>t.size()) || (!shoppingCarts.isEmpty()&&num>t.size()+2)){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
+            /*if(t instanceof )
+            else*/ if((shoppingCarts.isEmpty()&&num>t.size()) || (!shoppingCarts.isEmpty()&&num>t.size()+2)){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
                 System.out.println("메뉴판에 없는 번호입니다.");
             } else return num; //유효한 숫자일 경우 반복 종료 및 숫자 반환
         }while(true);

@@ -28,8 +28,8 @@ public class Kiosk {
             /*2. 음식 메뉴 선택 단계*/
             List<MenuItem> menuItemsList=menus.get(command-1).menuItems;// 입력된 숫자에 맞는 음식 메뉴 List를 불러와 저장
             command = scanNumber(menuItemsList); //사용자로부터 메뉴 번호 입력 받기,(유효하지 않은 숫자 예외 처리)
-            MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴를 불러와 저장
             if (command != 0) {//선택된 음식 출력
+                MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴를 불러와 저장
                 System.out.println("선택한 메뉴: "+menuItem.foodName+"   | W "+menuItem.prize+" | "+menuItem.description);
             }
             //음식 메뉴 선택 단계에서 0 입력시 카테고리 선택 단계로 되돌아감
