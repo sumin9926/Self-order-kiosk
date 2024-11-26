@@ -30,11 +30,12 @@ public class Kiosk {
             } else showMenuItems(command); //입력된 카테고리 번호에 맞는 음식 메뉴 리스트 출력
 
             /*2. 음식 메뉴 선택 단계*/
-            List<MenuItem> menuItemsList=menus.get(command-1).getMenuItems();// 입력된 숫자에 맞는 카테고리의 음식 메뉴 List를 불러와 저장
-            MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴 하나를 불러와 저장
+            List<MenuItem> menuItemsList=menus.get(command-1).getMenuItems();// 입력된 숫자에 맞는 카테고리의 음식 메뉴 List
             command = scanNumber(menuItemsList); //사용자로부터 선택하려는 메뉴 번호 입력 받기,(유효하지 않은 숫자 예외 처리)
+            MenuItem menuItem=menuItemsList.get(command-1); // 입력된 숫자에 맞는 음식 메뉴 하나
             if (command != 0) {//선택된 메뉴 정보 출력
-                System.out.println("선택한 메뉴: "+menuItem.getFoodName()+"   | W "+menuItem.getPrize()+" | "+menuItem.getDescription());
+                System.out.println("선택한 메뉴: "+menuItem.getFoodName()+"   | W "
+                        +menuItem.getPrize()+" | "+menuItem.getDescription()+"\n");
                 /*3. 장바구니에 음식 담기*/
                 addToCart(menuItem);
             }
@@ -74,7 +75,7 @@ public class Kiosk {
         Scanner sc=new Scanner(System.in);
         do{
             int num=sc.nextInt(); //숫자 입력
-            if(num>t.size()){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
+            if((shoppingCarts.isEmpty()&&num>t.size()) || (!shoppingCarts.isEmpty()&&num>t.size()+2)){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
                 System.out.println("메뉴판에 없는 번호입니다.");
             } else return num; //유효한 숫자일 경우 반복 종료 및 숫자 반환
         }while(true);
