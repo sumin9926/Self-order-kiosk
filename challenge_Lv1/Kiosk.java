@@ -21,6 +21,8 @@ public class Kiosk {
             /*1. 카테고리 선택 단계*/
             System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             showCategory();//카테고리 목록 표시
+            if(!shoppingCarts.isEmpty()) showOrderMenu(); //장바구니에 메뉴가 담겨있으면 ORDER MENU도 같이 출력
+
             command = scanNumber(menus);//사용자로부터 카테고리 번호 입력 받기,(유효하지 않은 숫자 예외 처리)
             if (command == 0) { //입력된 숫자가 0일경우 키오스크 종료
                 System.out.println("키오스크를 종료합니다.");
