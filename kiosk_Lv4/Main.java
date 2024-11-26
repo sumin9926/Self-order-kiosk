@@ -1,7 +1,5 @@
 package kiosk_Lv4;
 
-import java.util.List;
-
 /**
  * 키오스크 프로그램의 시작 지점<br>
  * 음식 카테고리 생성 및 카테고리별 음식 아이템을 저장합니다.
@@ -33,7 +31,9 @@ public class Main {
                 new MenuItem("Shakes", 6.8, "쫀득하고 진한 커스터드가 들어간 클래식 쉐이크(바닐라/초콜릿/스트로베리/블랙 & 화이트/솔티드 카라멜/피넛 버터/커피)"));
 
 
-        Kiosk kiosk=new Kiosk(); //kiosk 객체 생성
+        Kiosk kiosk=new Kiosk(); //Kiosk 객체 생성
+        kiosk.addMenu(burgers, drinks, desserts); //Kiosk에 Menu인스턴스를 넘겨줌
+
         kiosk.start(); //키오스크 프로그램 실행
     }
 }
