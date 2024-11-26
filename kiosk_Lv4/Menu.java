@@ -1,5 +1,7 @@
 package kiosk_Lv4;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,11 +15,10 @@ public class Menu {
     /*생성자*/
     public Menu(String category){ //생성자를 선언과 동시에 카테고리 이름을 지정
         this.category=category;
+        this.menuItems=new ArrayList<>(); //리스트 초기화
     }
 
     public void addItems(MenuItem...menuItem){ //음식 메뉴를 List에 저장
-            for(MenuItem item:menuItem){
-                this.menuItems.add(item);
-            }
+        this.menuItems.addAll(Arrays.asList(menuItem));
     }
 }
