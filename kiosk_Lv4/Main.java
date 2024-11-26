@@ -7,9 +7,9 @@ package kiosk_Lv4;
 public class Main {
     public static void main(String[] args) {
         /*카테고리별로 Menu 객체 생성하면서 이름도 함께 설정*/
-        Menu burgers=new Menu("Burgers");
-        Menu drinks=new Menu("drinks");
-        Menu desserts=new Menu("desserts");
+        Menu burgers=new Menu("BURGERS");
+        Menu drinks=new Menu("DRINKS");
+        Menu desserts=new Menu("DESSERTS");
 
         /*각 카테고리에 메뉴 아이템 저장*/
         //햄버거 카테고리
