@@ -30,11 +30,11 @@ public class Kiosk {
             command = sc.nextInt(); //사용자로부터 숫자 입력 받기
             if (command == 0) { // 입력된 숫자가 0이면 프로그램 종료
                 System.out.println("키오스크를 종료합니다.");
-            }else if(command<=menuItems.size()){ // 유효한 숫자가 입력되면 이름, 가격, 설명 출력
+            }else if(command>0 && command<=menuItems.size()){ // 유효한 숫자가 입력되면 이름, 가격, 설명 출력
                 System.out.println("선택한 메뉴: " + menuItems.get(command-1).foodName + "   | W "
                         + menuItems.get(command-1).prize + " | " + menuItems.get(command-1).description+"\n");
             }else{
-                System.out.println("메뉴판에 없는 번호입니다."+"\n"); //유효하지 않은 숫자 입력 시 오류 메시지 출력
+                System.out.println("메뉴판에 없는 번호입니다.\n"); //유효하지 않은 숫자 입력 시 오류 메시지 출력
             }
         }while (command!=0);
     }
