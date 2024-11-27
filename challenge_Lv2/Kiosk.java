@@ -1,6 +1,7 @@
 package challenge_Lv2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 키오스크 실행 및 사용자 입력 처리를 담당하는 클래스<br>
@@ -123,17 +124,16 @@ public class Kiosk {
     /*장바구니 메뉴 주문을 진행하는 메서드*/
     private void orderItems(){
         Double totalPrize=0.0;
-        int index=1;
         /*1. 장바구니에 담긴 메뉴 출력*/
         System.out.println("[ Orders ]");
         for(ShoppingCart cartItem: shoppingCarts.values()){ //장바구니에 담기 모든 메뉴 출력
-            System.out.println((index++)+". "+cartItem.getItemName()+" | W "
+            System.out.println(cartItem.getItemName()+" | W "
                     +cartItem.getPrize()+" | 총 수량: "+cartItem.getQuantity());
             totalPrize+=cartItem.getPrize()*cartItem.getQuantity(); //모든 메뉴의 가격 합 계산
         }
         /*2. 장바구니 메뉴 가격 합계 출력*/
         System.out.println("\n[ Total ]");
-        System.out.println("W "+totalPrize);
+        System.out.println("W "+String.format("%.1f",totalPrize));
 
         /*3. 주문 혹은 보류 단계*/
         System.out.println("\n1. 주문      2. 메뉴판      3. 메뉴 수정");
@@ -157,13 +157,26 @@ public class Kiosk {
                 else System.out.println("유효하지 않은 번호입니다."); // 유효하지 않은 숫자 입력시 예외 메시지 출력
             }while(true);
             totalPrize=discountRatesArr[num-1].discountPrize(totalPrize); //총 가격에 선택된 할인 유형에 맞는 할인율 적용
-            System.out.println("주문이 완료되었습니다. 금액은 W "+totalPrize+" 입니다.\n");
+            System.out.println("주문이 완료되었습니다. 금액은 W "+String.format("%.1f",totalPrize)+" 입니다.\n"); //소수점 1번째 자리까지 출력
             shoppingCarts.clear(); //장바구니 초기화
         }
-        else if(num==3){
+        else if(num==3) { //장바구니에서 선택한 메뉴 삭제 진행
+            System.out.println("삭제할 메뉴의 이름을 입력해주세요.");
+            String foodName; //삭제할 메뉴 이름 저장
+            sc.nextLine(); //버퍼 비우기
+            do {
+                foodName = sc.nextLine(); //삭제할 메뉴 이름 입력받기
+                if (shoppingCarts.containsKey(foodName)) break; //입력한 메뉴명이 장바구니에 존재할 경우 반복문 탈출
+                else System.out.println("존재하지 않는 메뉴명입니다."); // 유효하지 않은 메뉴명 입력시 예외 메시지 출력
+            } while (true);
 
+            final String finalFoodName = foodName; //람다식 사용시 외부 변수는 'final' 혹은 '사실상 final'이어야한다.(변수캡쳐)
+            Map<String, ShoppingCart> filteredCart = shoppingCarts.entrySet().stream()
+                    .filter(stringShoppingCartEntry -> !stringShoppingCartEntry.getKey().equals(finalFoodName))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            shoppingCarts.clear();//기존 맵 비우기
+            shoppingCarts.putAll(filteredCart);//필터링된 값으로 장바구니 새로 채우기
         }
     }
-
 }
 
