@@ -49,7 +49,7 @@ public class Kiosk {
     private void showMenuItems(int categoryNum){
         List<MenuItem> menuItemsList=menus.get(categoryNum-1).getMenuItems(); // 입력된 숫자에 맞는 음식 메뉴 List를 불러와 저장
 
-        System.out.println("\n"+"[ "+menus.get(categoryNum-1).getCategory()+" MENU ]"); // 선택된 카테고리 이름 출력
+        System.out.println("\n[ "+menus.get(categoryNum-1).getCategory()+" MENU ]"); // 선택된 카테고리 이름 출력
         for(int i=0; i<menuItemsList.size(); i++){ //음식 메뉴 리스트 출력
             System.out.println((i+1)+". "+menuItemsList.get(i).getFoodName()+"   | W "+menuItemsList.get(i).getPrize()+" | "+menuItemsList.get(i).getDescription());
         }
@@ -61,7 +61,7 @@ public class Kiosk {
         Scanner sc=new Scanner(System.in);
         do{
             int num=sc.nextInt(); //숫자 입력
-            if(num>t.size()){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
+            if(num<0 || num>t.size()){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
                 System.out.println("메뉴판에 없는 번호입니다.");
             } else return num; //유효한 숫자일 경우 반복 종료 및 숫자 반환
         }while(true);

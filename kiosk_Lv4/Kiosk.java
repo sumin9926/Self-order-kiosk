@@ -38,7 +38,7 @@ public class Kiosk {
 
     /*카테고리 목록을 출력하는 메서드*/
     public void showCategory(){
-        System.out.println("\n"+"[ MAIN MENU ]");
+        System.out.println("\n[ MAIN MENU ]");
         for(int i=0; i< menus.size(); i++){
             System.out.println((i+1)+". "+menus.get(i).category); //카테고리 이름 출력
         }
@@ -61,7 +61,7 @@ public class Kiosk {
         Scanner sc=new Scanner(System.in);
         do{
             int num=sc.nextInt(); //숫자 입력
-            if(num>t.size()){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
+            if(num<0 || num>t.size()){ //입력받은 숫자가 유효하지 않을경우 예외 메시지 출력
                 System.out.println("메뉴판에 없는 번호입니다.");
             } else return num; //유효한 숫자일 경우 반복 종료 및 숫자 반환
         }while(true);
