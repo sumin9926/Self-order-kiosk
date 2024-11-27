@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Kiosk {
     Scanner sc=new Scanner(System.in);
-    private Map<String, ShoppingCart> shoppingCarts=new HashMap<>(); //선택한 메뉴를 담을 장바구니 컬렉션
+    private Map<String, ShoppingCart> shoppingCarts=new HashMap<>(); //선택한 메뉴를 담을 장바구니 컬렉션(Key=음식 이름)
     private static List<Menu> menus=new ArrayList<>(); //Menu 객체를 저장하는 List
 
     void addMenu(Menu...menuArr){ //Menu 객체를 List에 저장하는 메서드
@@ -23,16 +23,19 @@ public class Kiosk {
             System.out.println("=======================================");
             System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             showCategory();//카테고리 목록 표시
+
             if(!shoppingCarts.isEmpty()) showOrderMenu(); //장바구니에 메뉴가 담겨있으면 ORDER MENU도 같이 출력
             command = scanNumber(menus);//사용자로부터 카테고리 번호 입력 받기,(유효하지 않은 숫자 예외 처리)
             if (command == 0) { //입력된 숫자가 0일경우 키오스크 종료
                 System.out.println("키오스크를 종료합니다.");
                 return;
-            } else if(command<=menus.size()) showMenuItems(command); //입력된 카테고리 번호에 맞는 음식 메뉴 리스트 출력
+            }
+            else if(command<=menus.size()) showMenuItems(command); //입력된 카테고리 번호에 맞는 음식 메뉴 리스트 출력
             else if(command==menus.size()+1) {
                 orderItems(); //장바구니 확인 및 주문 진행
                 continue; //메뉴판으로 돌아감
-            }else{
+            }
+            else{
                 shoppingCarts.clear(); //진행중인 주문 취소
                 System.out.println("주문 취소. 장바구니를 초기화합니다.\n");
                 continue;
@@ -76,7 +79,6 @@ public class Kiosk {
     /*카테고리 번호에 맞는 음식 메뉴 리스트를 출력하는 메서드*/
     private void showMenuItems(int categoryNum){
         List<MenuItem> menuItemsList=menus.get(categoryNum-1).getMenuItems(); // 입력된 숫자에 맞는 음식 메뉴 List를 불러와 저장
-
         System.out.println("\n"+"[ "+menus.get(categoryNum-1).getCategory()+" MENU ]"); // 선택된 카테고리 이름 출력
         for(int i=0; i<menuItemsList.size(); i++){ //음식 메뉴 리스트 출력
             System.out.println((i+1)+". "+menuItemsList.get(i).getFoodName()+"   | W "+menuItemsList.get(i).getPrize()+" | "+menuItemsList.get(i).getDescription());
@@ -121,10 +123,11 @@ public class Kiosk {
     /*장바구니 메뉴 주문을 진행하는 메서드*/
     private void orderItems(){
         Double totalPrize=0.0;
+        int index=1;
         /*1. 장바구니에 담긴 메뉴 출력*/
         System.out.println("[ Orders ]");
         for(ShoppingCart cartItem: shoppingCarts.values()){ //장바구니에 담기 모든 메뉴 출력
-            System.out.println(cartItem.getItemName()+" | W "
+            System.out.println((index++)+". "+cartItem.getItemName()+" | W "
                     +cartItem.getPrize()+" | 총 수량: "+cartItem.getQuantity());
             totalPrize+=cartItem.getPrize()*cartItem.getQuantity(); //모든 메뉴의 가격 합 계산
         }
@@ -133,16 +136,32 @@ public class Kiosk {
         System.out.println("W "+totalPrize);
 
         /*3. 주문 혹은 보류 단계*/
-        System.out.println("\n1. 주문      2. 메뉴판");
-        int num=Integer.MAX_VALUE; //입력받은 숫자를 저장할 변수
+        System.out.println("\n1. 주문      2. 메뉴판      3. 메뉴 수정");
+        int num; //입력받은 숫자를 저장할 변수
         do {
             num = sc.nextInt();//사용자로부터 번호 입력 받기
-            if(num==1 || num==2) break; // 유효한 숫자 입력시 반복문 종료(1. 주문, 2. 메뉴판)
+            if(num==1 || num==2 || num==3) break; // 유효한 숫자 입력시 반복문 종료(1. 주문, 2. 메뉴판)
             else System.out.println("메뉴판에 없는 번호입니다."); // 유효하지 않은 숫자 입력시 예외 메시지 출력
         }while(true);
+
         if(num==1) { //1 입력시 주문 진행
+            /*4. 할인 유형 선택 및 할인율 적용*/
+            System.out.println("할인 정보를 입력해주세요.");
+            DiscountRate[] discountRatesArr=DiscountRate.values(); //할인 대상 배열
+            for(int i=0; i< discountRatesArr.length; i++){ //할인정보 출력
+                System.out.println((i+1)+". "+discountRatesArr[i].name()+" : "+discountRatesArr[i].getDiscountRate()+"%");
+            }
+            do {
+                num = sc.nextInt();//사용자로부터 할인 유형 번호 입력 받기
+                if(num>0 && num<=discountRatesArr.length) break; // 유효한 숫자 입력시 반복문 종료
+                else System.out.println("유효하지 않은 번호입니다."); // 유효하지 않은 숫자 입력시 예외 메시지 출력
+            }while(true);
+            totalPrize=discountRatesArr[num-1].discountPrize(totalPrize); //총 가격에 선택된 할인 유형에 맞는 할인율 적용
             System.out.println("주문이 완료되었습니다. 금액은 W "+totalPrize+" 입니다.\n");
             shoppingCarts.clear(); //장바구니 초기화
+        }
+        else if(num==3){
+
         }
     }
 
