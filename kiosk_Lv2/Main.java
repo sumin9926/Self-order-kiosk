@@ -31,7 +31,7 @@ public class Main {
             command = sc.nextInt(); //사용자로부터 숫자 입력 받기
             if (command == 0) { // 입력된 숫자가 0이면 프로그램 종료
                 System.out.println("키오스크를 종료합니다.");
-            }else if(command<=menuList.size()){ // 메뉴에 있는 숫자가 입력되면 이름, 가격, 설명 출력
+            }else if(command>0 && command<=menuList.size()){ // 메뉴에 있는 숫자가 입력되면 이름, 가격, 설명 출력
                 System.out.println("선택한 메뉴: " + menuList.get(command-1).foodName + "   | W "
                         + menuList.get(command-1).prize + " | " + menuList.get(command-1).description+"\n");
             }else{
