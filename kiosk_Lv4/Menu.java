@@ -21,4 +21,8 @@ public class Menu {
     public void addItems(MenuItem...menuItem){ //음식 메뉴를 List에 저장
         this.menuItems.addAll(Arrays.asList(menuItem));
     }
+
+    public String getCategory() { //카테고리 이름을 반환하는 Getter 메서드 (요구사항 반영)
+        return category;
+    }
 }

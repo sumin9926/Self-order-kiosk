@@ -40,7 +40,7 @@ public class Kiosk {
     public void showCategory(){
         System.out.println("\n[ MAIN MENU ]");
         for(int i=0; i< menus.size(); i++){
-            System.out.println((i+1)+". "+menus.get(i).category); //카테고리 이름 출력
+            System.out.println((i+1)+". "+menus.get(i).getCategory()); //카테고리 이름 출력
         }
         System.out.println("0. 종료      | 종료");
     }
@@ -49,7 +49,7 @@ public class Kiosk {
     public void showMenuItems(int categoryNum){
         List<MenuItem> menuItemsList=menus.get(categoryNum-1).menuItems; // 입력된 숫자에 맞는 음식 메뉴 List를 불러와 저장
 
-        System.out.println("\n"+"[ "+menus.get(categoryNum-1).category+" MENU ]"); // 선택된 카테고리 이름 출력
+        System.out.println("\n"+"[ "+menus.get(categoryNum-1).getCategory()+" MENU ]"); // 선택된 카테고리 이름 출력
         for(int i=0; i<menuItemsList.size(); i++){ //음식 메뉴 리스트 출력
             System.out.println((i+1)+". "+menuItemsList.get(i).foodName+"   | W "+menuItemsList.get(i).prize+" | "+menuItemsList.get(i).description);
         }
